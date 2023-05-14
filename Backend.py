@@ -17,34 +17,10 @@ def RepeatedClient (ClientName):
         else:
            return True
 
-
-
-
-
-
-
-def buttonsubmission1(box1):
-    ans = box1.get()
-    return ans
-
-
-
-
 def NewClient():
-        
-    window = tkinter.Tk()
-    window.geometry("1080x900")
-    title = tkinter.Label(window, text="Barberia JLU", font="30")
-    title.pack()
 
-
-    Clientboxtext = tkinter.Entry(window) ##caja de entrada de datos
-    Clientboxtext.pack()
-    client = buttonsubmission1(Clientboxtext)
-    client_button = tkinter.Button(window,text="Enviar",command="client")
-
-
-
+    client = input(("cliente: "))
+    client.title()
     Parameter = RepeatedClient(client)
 
     if Parameter == False:
@@ -102,7 +78,6 @@ def NewClient():
 
 
 
-
 def Lookup ():
 
     print("Deseas buscar al cliente por: \n1.Nombre\n2.Numero de Telefono\n")
@@ -136,4 +111,21 @@ def Lookup ():
             print("Error la lista de clientes esta vacia.")
  
 
+def Windowadding ():
+        
+    window = tkinter.Tk()
+    window.geometry("1080x900")
 
+    title = tkinter.Label(window, text="Barberia JLU", font="30")
+    title.pack()
+
+
+    addclientButon = tkinter.Button(window, text="Nuevo Cliente", padx= 20 , pady = 10, command= NewClient)
+    addclientButon.pack()
+
+    Clientboxtext = tkinter.Entry(window)
+    Clientboxtext.pack()
+
+    window.mainloop()
+
+Windowadding()
