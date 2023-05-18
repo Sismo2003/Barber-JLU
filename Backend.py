@@ -1,63 +1,71 @@
 import json
-import tkinter
+from tkinter import *
 import json
 import time 
+from tkinter import messagebox
+import datetime
 
-def RepeatedClient (ClientName):
-    with open("database.json", "r") as file:
-        main = json.load(file)
-    JsonList = main;
+
+
+def RepeatedClient (ClientName,PhoneNumber,email):
+    try:
+        with open("database.json", "r") as file:
+            main = json.load(file)
+        JsonList = main;
+    except:
+        print("error al cargar la base de datos")
+    flag = False
     for i in JsonList:
-        if(i.get("Nombre del cliente") == ClientName):
-           return True
-        elif (i.get('Nombre del Cliente') != ClientName):
-           return False
-
-
+        if(i.get('Nombre del Cliente') == ClientName or i.get('Whatsapp') == PhoneNumber and i.get('Correo Electronico') == email):
+            flag = True
+    if(flag):
+        return True
+    else:
+        return False
 
 
 def NewClient(client,barber,style,products,birthday,phoneNumber,observations,email,services,frequency):
-    client.title()
-    Parameter = RepeatedClient(client)
-    print(client)
+    client = client.title();
+    barber = barber.title();
+    style = style.capitalize();
+    products = products.title();
+    observations =observations.capitalize();
+    email = email.lower();
+    barber = barber.title();
+    frequency = frequency.title();
+    todayday = datetime.date.today()
+    last_visit = f"{todayday}"
+    Parameter = RepeatedClient(client,phoneNumber,email)
     if Parameter == False:
-        barber.title();
-        style.capitalize();
-        products.title();
-        observations.capitalize();
-        email.lower();
-        barber.title()
         try:
             with open("database.json", "r") as file:
                 main = json.load(file)
         except FileNotFoundError:
-            print("El archivo no fue encontrado.")
+             messagebox.showwarning("Error al encontrar la base de datos.", "La base de datos no fue encontrada, revisa que exista en tus archivos.")
         try:
             data = {
-                "Nombre del cliente" : client,
-                "Nombre del Barbero" : barber,
-                "Cumple" : birthday,
+                "Nombre del Cliente" : client,
+                "Fecha de Nacimiento" : birthday,
                 "Whatsapp" : phoneNumber,
-                "Estilo de corte" : style,
-                "Frecuencia de corte" : frequency,
-                "Productos que usa" : products,
-                "Servicios alternos" : services,
-                "Observaciones" : observations,
-                "Correo Electronico": email
+                "Correo Electronico": email,
+                "Nombre del Barbero" : barber,
+                "Estilo de Corte" : style,
+                "Frecuencia de Corte" : frequency,
+                "Productos Utilizados" : products,
+                "Servicios Alternos" : services,
+                "Observaciones" :observations,
+                "Visitas" : last_visit
             }
             main.append(data)
             with open("database.json", "w") as file:
                 json.dump(main,file,indent=4)
         except:
-            print("No fue possible agregar al cliente.")
+            messagebox.showwarning("Error en la Base De Datos","No fue possible agregar al cliente.")
 
 
     elif True:  
-        print("Cliente repetido")
-        #return menu()  
+        messagebox.showwarning("Cliente Repetido","Actualmente existe un cliente con la misma información digitada, trata de editar la información del cliente.",)
 
-    else:
-        print("Upss error.")
 
 
 

@@ -1,29 +1,7 @@
-import json
+import datetime
 
-def RepeatedClient (ClientName):
-    with open("database.json", "r") as file:
-        main = json.load(file)
-    JsonList = main;
-    for i in JsonList:
-        if(i.get("Nombre del cliente") == ClientName):
-             print("nel")
-        else:
-             
-            
-        
+import time
 
-var = RepeatedClient("Alexis Ortiz")
-
-
-
-
-
-
-
-
-def save ():
-    if (i.get('Nombre del Cliente') == f"{ClientName}"):
-           return True
-    else:
-        print(JsonList)
-        return False
+todayday = datetime.date.today()
+last_visit = f"{todayday}"
+print(last_visit, " ---", todayday)

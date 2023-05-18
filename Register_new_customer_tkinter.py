@@ -1,11 +1,11 @@
 import json
 import tkinter as tkr
 import json
-import time 
+import datetime
 from tkinter import ttk
 from tkcalendar import DateEntry
 from Backend import NewClient
-
+import time
 
 with open("hair_products.json", "r") as file:
     hair_products_list = json.load(file)
@@ -29,7 +29,7 @@ def submtion_data ():
     alternaveServices = alternave_services_combobox.get()
     observations = observations_entry.get()
     observations.capitalize()
-
+    #attendances = datetime.date.today()
     #print(f"Nombre: {firstName} {lastName}   fecha de nacimiento: {birthday} ")
     #print(f"Tel. {phoneNumber}   Correo Electronico: {email}")
     #print(f"Frecuencia de corte: {hairCutFrequency}  Productos ocurrentes: {hairProducts}")
