@@ -1,14 +1,18 @@
 [
     {
         "Nombre del cliente": "Alexis Ortiz",
-        "Nombre del Barbero": "Chava",
-        "Whatsapp": "3334108254",
-        "Cumple": "03/11/2003",
-        "Estilo de corte": "Fade",
-        "Frecuencia de corte": "2 semanas",
-        "Productos que usa": "Cera",
-        "Servicios alternos": "barba",
-        "Observaciones": "Le gusta largo el pelo en la parte de arriba",
-        "Correo Electronico": "alexissuper@hotmail.com"
+        "Nombre del Barbero": "Chava"
+    },
+    {
+        "Nombre del cliente": "Alexis  Ortiz",
+        "Nombre del Barbero": "",
+        "Cumple": "5/18/23",
+        "Whatsapp": "",
+        "Estilo de corte": "",
+        "Frecuencia de corte": "",
+        "Productos que usa": "",
+        "Servicios alternos": "",
+        "Observaciones": "",
+        "Correo Electronico": ""
     }
 ]

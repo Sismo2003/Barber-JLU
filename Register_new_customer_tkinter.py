@@ -3,6 +3,9 @@ import tkinter as tkr
 import json
 import time 
 from tkinter import ttk
+from tkcalendar import DateEntry
+from Backend import NewClient
+
 
 with open("hair_products.json", "r") as file:
     hair_products_list = json.load(file)
@@ -11,7 +14,32 @@ with open("alternave_services.json", "r") as file:
     alternave_services_json = json.load(file)
 
 def submtion_data ():
-    print("hi");
+    firstName = first_name_entry.get()
+    lastName = last_name_entry.get()
+    final_client = firstName+" "+lastName
+    birthday = final_result.get()
+    phoneNumber = phone_number_entry.get()
+    email = email_entry.get()
+    email.lower()
+    hairCutFrequency = hair_cut_frequency_entry.get()
+    hairCutStyle = hair_cut_style_entry.get()
+    hairProducts = hair_products_combobox.get()
+    barberName = barber_name_entry.get()
+    barberName.title()
+    alternaveServices = alternave_services_combobox.get()
+    observations = observations_entry.get()
+    observations.capitalize()
+
+    #print(f"Nombre: {firstName} {lastName}   fecha de nacimiento: {birthday} ")
+    #print(f"Tel. {phoneNumber}   Correo Electronico: {email}")
+    #print(f"Frecuencia de corte: {hairCutFrequency}  Productos ocurrentes: {hairProducts}")
+    #print(f"Corte: {hairCutStyle}   Barbero: {barberName}")
+    #print(f"Servios alternos: {alternaveServices}  observaciones: {observations}")
+    
+
+    NewClient(final_client,barberName,hairCutStyle,hairProducts,birthday,phoneNumber,observations,email,alternaveServices,hairCutFrequency)
+
+
 
 #Main Window
 window = tkr.Tk()
@@ -21,7 +49,7 @@ MainFrame.pack()
 
 ##########################Client information #################################
 client_info_frame = tkr.LabelFrame(MainFrame,text="Información del Cliente")
-client_info_frame.grid(row=0,column=0, padx=20,pady=10)
+client_info_frame.grid(row=0,column=0,sticky="news", padx=20,pady=10)
 
 first_name_label = tkr.Label(client_info_frame,text="Nombre: ")
 first_name_label.grid(row=0,column=0)
@@ -33,10 +61,11 @@ last_name_label.grid(row=0,column=1)
 last_name_entry = tkr.Entry(client_info_frame)
 last_name_entry.grid(row=1,column=1)
 
+final_result = tkr.StringVar()
 birthday_label = tkr.Label(client_info_frame,text="Fecha de Nacimiento: ")
 birthday_label.grid(row=0,column=3)
-birthday_entry = tkr.Entry(client_info_frame,)
-birthday_entry.grid(row=1, column= 3)
+birthday_entry = DateEntry(client_info_frame,selectmode="day",textvariable=final_result)
+birthday_entry.grid(row=1, column= 3, padx=20)
 
 phone_number_label = tkr.Label(client_info_frame,text="Numero Telefonico: ")
 phone_number_label.grid(row=2 ,column=0)
@@ -54,7 +83,7 @@ for widget in client_info_frame.winfo_children():
 ######################### #Barber Information #########################
 
 barber_information = tkr.LabelFrame(MainFrame,text="Información del Corte")
-barber_information.grid(row=1,column=0, padx=20,pady=10)
+barber_information.grid(row=1,column=0,sticky="news", padx=20,pady=10)
 
 hair_cut_style_label = tkr.Label(barber_information,text="Estilo de Corte: ")
 hair_cut_style_label.grid(row=0,column=0)
@@ -90,7 +119,7 @@ for widget in barber_information.winfo_children():
 ############ OBSERVATIONS ###########
 
 client_observations_frame = tkr.LabelFrame(MainFrame,text="Observaciones del Cliente")
-client_observations_frame.grid(row=3,column=0, padx=20,pady=10)
+client_observations_frame.grid(row=3,column=0,sticky="news", padx=20,pady=10)
 
 observations_label = tkr.Label(client_observations_frame,text="Observaciones :")
 observations_label.grid(row=0,column=0)
@@ -98,5 +127,10 @@ observations_entry = tkr.Entry(client_observations_frame)
 observations_entry.grid(row=1,column=0)
 for widget in client_observations_frame.winfo_children():
     widget.grid_configure(padx=100,pady=5);
+
+
+submtion_button = tkr.Button(MainFrame,text="Enviar Datos",command=submtion_data)
+submtion_button.grid(row=0,column=2,sticky="news",padx=20,pady=20)
+
 
 window.mainloop()
