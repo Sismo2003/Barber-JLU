@@ -4,7 +4,7 @@ import json
 import datetime
 from tkinter import ttk
 from tkcalendar import DateEntry
-from Backend import NewClient
+from Register_new_customer_tkinter_backend import NewClient
 import time
 
 with open("hair_products.json", "r") as file:
@@ -43,9 +43,10 @@ def submtion_data ():
 
 #Main Window
 window = tkr.Tk()
-window.title("Registrar un Nuevo Cliente ")
+window.title("Registrar un Nuevo Cliente ") 
 MainFrame = tkr.Frame(window);
 MainFrame.pack()
+
 
 ##########################Client information #################################
 client_info_frame = tkr.LabelFrame(MainFrame,text="Información del Cliente")

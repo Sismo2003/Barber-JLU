@@ -1,27 +1,14 @@
 [
     {
-        "Nombre del cliente": " ",
+        "Nombre del cliente": "Alexis Ortiz",
         "Nombre del Barbero": "",
         "Cumple": "5/18/23",
         "Whatsapp": "",
         "Estilo de corte": "",
         "Frecuencia de corte": "",
-        "Productos que usa": "Spray de refuerzo para el cabello fino",
+        "Productos que usa": "",
         "Servicios alternos": "",
         "Observaciones": "",
         "Correo Electronico": ""
-    },
-    {
-        "Nombre del Cliente": " A",
-        "Fecha de Nacimiento": "5/18/23",
-        "Whatsapp": "a",
-        "Correo Electronico": "a",
-        "Nombre del Barbero": "A",
-        "Estilo de Corte": "A",
-        "Frecuencia de Corte": "A",
-        "Productos Utilizados": "A",
-        "Servicios Alternos": "a",
-        "Observaciones": "A",
-        "Visitas": "2023-05-18"
     }
 ]
