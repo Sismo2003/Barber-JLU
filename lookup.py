@@ -38,10 +38,12 @@ def Lookup (howtolookup,userentry):
             flag = False;
             information = {};
             clientscount = 0;
-            if (i.get('Whatsapp') == f"{Search}"):
-                print (i)
-            else:
-                print("El cliente no exite")
+            for i in JsonList:
+                if (i.get('Whatsapp') == userentry):
+                    flag = True
+                    information = 
+                else:
+                    print("El cliente no exite")
         except:
             print("Error la lista de clientes esta vacia.")
  

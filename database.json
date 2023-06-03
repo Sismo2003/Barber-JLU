@@ -10,5 +10,18 @@
         "Servicios alternos": "",
         "Observaciones": "",
         "Correo Electronico": ""
+    },
+    {
+        "Nombre del Cliente": "Juan Orti",
+        "Fecha de Nacimiento": "",
+        "Whatsapp": "33423342",
+        "Correo Electronico": "sdsdsdas@hotmail.com",
+        "Nombre del Barbero": "Otro...",
+        "Estilo de Corte": "Desconozco",
+        "Frecuencia de Corte": "2 Semansa",
+        "Productos Utilizados": "Pasta Para El Cabello",
+        "Servicios Alternos": "Afeitado de contornos",
+        "Observaciones": "Puto",
+        "Visitas": "2023-06-02"
     }
 ]

@@ -7,6 +7,7 @@ from tkcalendar import DateEntry
 from Register_new_customer_tkinter_backend import NewClient
 import time
 
+
 with open("hair_products.json", "r") as file:
     hair_products_list = json.load(file)
 
@@ -38,7 +39,7 @@ def submtion_data ():
     
 
     NewClient(final_client,barberName,hairCutStyle,hairProducts,birthday,phoneNumber,observations,email,alternaveServices,hairCutFrequency)
-
+    
 
 
 #Main Window
@@ -133,5 +134,6 @@ for widget in client_observations_frame.winfo_children():
 submtion_button = tkr.Button(MainFrame,text="Enviar Datos",command=submtion_data)
 submtion_button.grid(row=0,column=2,sticky="news",padx=20,pady=20)
 
-
+window.
 window.mainloop()
+exit()
