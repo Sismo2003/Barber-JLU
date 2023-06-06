@@ -22,9 +22,7 @@ def RepeatedClient (ClientName,PhoneNumber,email):
         return True
     else:
         return False
-
-
-def NewClient(client,barber,style,products,birthday,phoneNumber,observations,email,services,frequency):
+def addingdatabase(client,barber,style,products,birthday,phoneNumber,observations,email,services,frequency):
     client = client.title();
     barber = barber.title();
     style = style.capitalize();
@@ -65,12 +63,6 @@ def NewClient(client,barber,style,products,birthday,phoneNumber,observations,ema
 
     elif True:  
         messagebox.showwarning("Cliente Repetido","Actualmente existe un cliente con la misma información digitada, trata de editar la información del cliente.",)
-
-
-
-
-
-
 def Lookup ():
 
     print("Deseas buscar al cliente por: \n1.Nombre\n2.Numero de Telefono\n")
