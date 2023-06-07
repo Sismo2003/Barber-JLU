@@ -1,12 +1,10 @@
-import tkinter as tk
+import json
 
-ventana = tk.Tk()
-ventana.title("Mostrar Texto en Ventana")
 
-texto = tk.Text(ventana)
-texto.pack()
+with open("database.json", "r") as file:
+    main = json.load(file)
+    JsonList = main;
 
-texto.insert(tk.END, "¡Hola, mundo!\n")
-texto.insert(tk.END, "Este es un ejemplo de texto en una ventana de Tkinter.")
+lista = [list(JsonList.values()) for JsonList in JsonList]
 
-ventana.mainloop()
+print(lista)
