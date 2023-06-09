@@ -310,5 +310,18 @@
         "Servicios Alternos": "",
         "Observaciones": "",
         "Visitas": "2023-06-07"
+    },
+    {
+        "Nombre del Cliente": "Aa A",
+        "Fecha de Nacimiento": "6/7/23",
+        "Whatsapp": "A",
+        "Correo Electronico": "a",
+        "Nombre del Barbero": "S",
+        "Estilo de Corte": "A",
+        "Frecuencia de Corte": "S",
+        "Productos Utilizados": "S",
+        "Servicios Alternos": "S",
+        "Observaciones": "S",
+        "Visitas": "2023-06-07"
     }
 ]

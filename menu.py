@@ -13,6 +13,7 @@ with open("hair_products.json", "r") as file:
 with open("alternave_services.json", "r") as file:
     alternave_services_json = json.load(file)
     
+ 
 def ebf ():
     messagebox.showwarning("Cierre de programa","Estas apunto de cerrar el programa, estas actualmente ingresando los datos de un cliente.")
     exit();
@@ -85,13 +86,13 @@ def lookupclient_button():
     treeview_y.column("Nombre",width=90)
     treeview_y.column("Fecha de Nacimiento",width=90)
     treeview_y.column("Telefono",width=80)
-    treeview_y.column("Email",width=140)
-    treeview_y.column("Barber",width=110)
+    treeview_y.column("Email",width=120)
+    treeview_y.column("Barber",width=100)
     treeview_y.column("Corte",width=100)
     treeview_y.column("Frecuencia de corte",width=100)
-    treeview_y.column("Productos",width=140)
+    treeview_y.column("Productos",width=120)
     treeview_y.column("Servicios alternos",width=100)
-    treeview_y.column("Observaciones",width=200)
+    treeview_y.column("Observaciones",width=180)
     treeview_y.column("Visitas",width=120)
     load_data(treeview_y,colms)
     
