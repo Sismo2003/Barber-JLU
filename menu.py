@@ -41,9 +41,10 @@ def load_data (treeview,toppinglist):
 
 
 def lookupclient_button():
+    window.withdraw()
     showdatawindow = tkr.Toplevel()
     showdatawindow.title("Mostrar Cliente");
-   # showdatawindow.geometry("600x500")
+    #showdatawindow.geometry("1080x480")
 
     frame = ttk.Frame(showdatawindow)
     frame.pack();
@@ -51,26 +52,38 @@ def lookupclient_button():
     lookupframe = ttk.LabelFrame(frame, text="Busqueda del cliente")  
     lookupframe.grid(row=0,column=0,padx=20,pady=20)
 
+    name_label = ttk.Label(lookupframe,text="Nombre del Cliente")
+    name_label.grid(row=0,column=0)
     name_entry = ttk.Entry(lookupframe)
-    name_entry.insert(0,"Nombre Del Cliente")
+    name_entry.insert(0,"Cristiano Gomes")
     name_entry.bind("<FocusIn>", lambda e:name_entry.delete(0,"end"))
-    name_entry.grid(row=0,column=0,sticky="ew",padx=20,pady=20)
+    name_entry.bind("<FocusOut>",lambda e:name_entry.insert(0,"Cristiano Gomes"))
+    name_entry.grid(row=1,column=0,sticky="ew",padx=20,pady=20)
 
+
+    phonenumber_label = ttk.Label(lookupframe,text="Numero Telefonico")
+    phonenumber_label.grid(row=2,column=0)
     phonenumber_entry = ttk.Entry(lookupframe)
-    phonenumber_entry.insert(0,"Numero De Telefono")
+    phonenumber_entry.insert(0,"+52 33 1234 5678")
     phonenumber_entry.bind("<FocusIn>",lambda e:phonenumber_entry.delete(0,"end"))
-    phonenumber_entry.grid(row=1,column=0,padx=20,pady=20,sticky="ew")
+    phonenumber_entry.bind("<FocusOut>",lambda e:phonenumber_entry.insert(0,"+52 33 1234 5678"))
+    phonenumber_entry.grid(row=3,column=0,padx=20,pady=20,sticky="ew")
 
+
+
+    email_label = ttk.Label(lookupframe,text="Correo Electronico")
+    email_label.grid(row=4,column=0)
     email_entry = ttk.Entry(lookupframe)
-    email_entry.insert(0,"Email")
+    email_entry.insert(0,"example@dominio.com")
     email_entry.bind("<FocusIn>",lambda e:email_entry.delete(0,"end"))
-    email_entry.grid(row=2,column=0,padx=20,pady=20,sticky="ew")
+    email_entry.bind("<FocusOut>",lambda e:email_entry.insert(0,"example@dominio.com"))
+    email_entry.grid(row=5,column=0,padx=10,pady=10,sticky="ew")
 
     button_entry = ttk.Button(lookupframe,text="Buscar")
-    button_entry.grid(row=3,column=0,padx=20,pady=20,sticky="nsew")
+    button_entry.grid(row=6,column=0,sticky="nsew")
 
     returntomenu_button = ttk.Button(lookupframe,text="Regresar al menu",command=lambda: returntomenu(showdatawindow))
-    returntomenu_button.grid(row=4,column=0,padx=20,pady=20,sticky="nsew")
+    returntomenu_button.grid(row=7,column=0,padx=20,pady=20,sticky="nsew")
 
     colms = ("Nombre","Fecha de Nacimiento","Telefono","Email","Barber","Corte","Frecuencia de corte","Productos","Servicios alternos","Observaciones","Visitas")
 
@@ -82,7 +95,8 @@ def lookupclient_button():
     treeview_y = ttk.Treeview(treeframe,show="headings",yscrollcommand=treescroll_y.set,columns=colms,height=12)
     treescroll_y.config(command=treeview_y.yview)
     treeview_y.pack()
-   
+    
+
     treeview_y.column("Nombre",width=90)
     treeview_y.column("Fecha de Nacimiento",width=90)
     treeview_y.column("Telefono",width=80)
@@ -94,7 +108,6 @@ def lookupclient_button():
     treeview_y.column("Servicios alternos",width=100)
     treeview_y.column("Observaciones",width=180)
     treeview_y.column("Visitas",width=120)
-    load_data(treeview_y,colms)
     
 
     #treescroll_x = ttk.Scrollbar(treeframe)
@@ -102,6 +115,8 @@ def lookupclient_button():
     #treeview_x = ttk.Treeview(treeframe,show="headings",columns=colms,height=12)
     #treescroll_x.config(command=treeview_x.xview)
     #treeview_x.pack()
+    load_data(treeview_y,colms)
+    showdatawindow.protocol("WM_DELETE_WINDOW",endcode)
     showdatawindow.mainloop()
 
 
@@ -280,19 +295,25 @@ def mainmenu():
     jlubarberimg.grid(row=0,column=3,sticky="news",padx=10,pady=10)
 
     ################### BUTTONS FRAME #####################
+
     mainFrame = ttk.Frame(frame)
     mainFrame.grid(row=1,column=0,padx=10,pady=10);
 
-    newclientregister = ttk.Button(mainFrame, text= "Nuevo Cliente",command=lambda: submition_button(window))
+
+
+    labelmainframe = ttk.LabelFrame(mainFrame,text="Opciones")
+    labelmainframe.grid(row=0,column=0,sticky=NS,padx=20,pady=20)
+
+    newclientregister = ttk.Button(labelmainframe, text= "Nuevo Cliente",command=lambda: submition_button(window))
     newclientregister.grid(row=0,column=0,sticky="news",padx=20,pady=20);
 
-    mode_switch = ttk.Checkbutton(mainFrame,text="Apariencia",style="Switch",command=lambda: theme_mode(mode_switch,theme_style))
-    mode_switch.grid(row=1,column=0,padx=5,pady=5,sticky="nsew")
+    mode_switch = ttk.Checkbutton(labelmainframe,text="Apariencia",style="Switch",command=lambda: theme_mode(mode_switch,theme_style))
+    mode_switch.grid(row=1,column=0,padx=20,pady=20,sticky="nsew")
 
-    lookup_button = ttk.Button(mainFrame,text="Busqueda de Cliente",command=lookupclient_button)
+    lookup_button = ttk.Button(labelmainframe,text="Busqueda de Cliente",command=lookupclient_button)
     lookup_button.grid(row=0,column=2,sticky="news",padx=20,pady=20)
 
-    exitbutton = ttk.Button(mainFrame,text="Salir",command=endcode)
+    exitbutton = ttk.Button(labelmainframe,text="Salir",command=endcode)
     exitbutton.grid(row=1,column=2,sticky="news",padx=20,pady=20);
     window.protocol("WM_DELETE_WINDOW",endcode)
 

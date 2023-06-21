@@ -1,10 +1,22 @@
-import json
+import tkinter as tk
+from tkinter import filedialog
 
 
-with open("database.json", "r") as file:
-    main = json.load(file)
-    JsonList = main;
+def open_file_dialog():
+    print("hi")
+# Crear la ventana principal de Tkinter
+window = tk.Tk()
 
-lista = [list(JsonList.values()) for JsonList in JsonList]
+# Crear un menú
+menu = tk.Menu(window)
+window.config(menu=menu)
 
-print(lista)
+# Crear un submenú "Archivo"
+file_menu = tk.Menu(menu)
+menu.add_cascade(label="Archivo", menu=file_menu)
+file_menu.add_command(label="Abrir Base de Datos", command=open_file_dialog)
+file_menu.add_separator()
+file_menu.add_command(label="Salir", command=window.quit)
+
+# Mostrar la ventana
+window.mainloop()
