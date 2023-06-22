@@ -3,15 +3,12 @@ import tkinter as tkr
 import json
 import datetime
 from tkinter import ttk
+from tkinter import messagebox
 from tkcalendar import DateEntry
 import time
 from Register_new_customer_backend import *
 
-with open("hair_products.json", "r") as file:
-    hair_products_list = json.load(file)
 
-with open("alternave_services.json", "r") as file:
-    alternave_services_json = json.load(file)
     
  
 def ebf ():
@@ -27,17 +24,24 @@ def returntomenu (winclose):
 
 def load_data (treeview,toppinglist):
     try:
-        with open("database.json", "r") as file:
+        with open("config.json","r") as file:
+           path = json.load(file);
+    except:
+        print("La dirrecion de la base de datos no existe.")
+        
+    try:
+        with open(path.get("DatabasePath"), "r") as file:
             main = json.load(file)
         JsonList = main;
-    except:
-        print("error al cargar la base de datos")
-    list_value = [list(JsonList.values()) for JsonList in JsonList]
-    for col_names in toppinglist:
-        treeview.heading(col_names,text=col_names)
+        list_value = [list(JsonList.values()) for JsonList in JsonList]
+        for col_names in toppinglist:
+            treeview.heading(col_names,text=col_names)
 
-    for value_tuple in list_value[0:]:
-        treeview.insert('',tkr.END,values=value_tuple)
+        for value_tuple in list_value[0:]:
+            treeview.insert('',tkr.END,values=value_tuple)
+    except:
+        print("Error al cargar la base de datos")
+        
 
 
 def lookupclient_button():
@@ -127,9 +131,6 @@ def theme_mode (interruptor,style):
     else:
         style.theme_use("forest-dark")
 
-def submition_button(window):
-    window.withdraw()
-    NewClient()
 
 def NewClient():
     def submtion_data ():
@@ -139,6 +140,7 @@ def NewClient():
         birthday = final_result.get()
         phoneNumber = phone_number_entry.get()
         email = email_entry.get()
+   
         email.lower()
         hairCutFrequency = hair_cut_frequency_entry.get()
         hairCutStyle = hair_cut_style_entry.get()
@@ -156,9 +158,10 @@ def NewClient():
         #print(f"Servios alternos: {alternaveServices}  observaciones: {observations}")
         addingdatabase(final_client,barberName,hairCutStyle,hairProducts,birthday,phoneNumber,observations,email,alternaveServices,hairCutFrequency)
 
-
+ 
 
     #Main Window
+    window.withdraw()
     newclientWindow = tkr.Toplevel()
     newclientWindow.title("Registrar un Nuevo Cliente ") 
     newclientmainframe = ttk.Frame(newclientWindow);
@@ -215,6 +218,12 @@ def NewClient():
     hair_cut_frequency_entry = ttk.Entry(barber_information)
     hair_cut_frequency_entry.grid(row=1,column=1)
 
+    with open("hair_products.json", "r") as file:
+        hair_products_list = json.load(file)
+
+    with open("alternave_services.json", "r") as file:
+        alternave_services_json = json.load(file)
+        
     hair_products_label = ttk.Label(barber_information,text="Productos Utilizados: ")
     hair_products_label.grid(row=0,column=2);
     hair_products_combobox = ttk.Combobox(barber_information, values=hair_products_list)
@@ -264,6 +273,40 @@ def NewClient():
 
 
 
+def pathdatabase ():
+    def cambiopath():
+        with open("config.json","r") as configfile:
+           path = json.load(configfile);
+        print(path.get("DatabasePath"))
+        path['DatabasePath'] = entry_base.get()
+        with open("config.json","w") as configfile:
+            json.dump(path,configfile,indent=4)
+            
+    window.withdraw()
+    pathwindow = tkr.Toplevel()
+    pathwindow.title("Dirrecion de Base de Datos")
+    pathmainframe = ttk.Frame(pathwindow)
+    pathmainframe.pack()
+
+
+    base_text=ttk.Label(pathmainframe,text="Path")
+    base_text.grid(column=0,row=0,padx=10,pady=10);
+    
+    entry_base = ttk.Entry(pathmainframe)
+    entry_base.grid(column=0,row=1,padx=10,pady=10);
+    
+    
+    submit_button = ttk.Button(pathmainframe,text="submit",command=cambiopath)
+    submit_button.grid(column=1,row=1,padx=10,pady=10);
+    
+    returntomenubutton = ttk.Button(pathmainframe,text="Menu",command=lambda: returntomenu(pathwindow))
+    returntomenubutton.grid(column=1,row=2,padx=10,pady=10);
+    
+    pathwindow.protocol("WM_DELETE_WINDOW",endcode)
+    pathwindow.mainloop()
+
+
+    return 0;
 
 
 def mainmenu():
@@ -302,20 +345,25 @@ def mainmenu():
 
 
     labelmainframe = ttk.LabelFrame(mainFrame,text="Opciones")
-    labelmainframe.grid(row=0,column=0,sticky=NS,padx=20,pady=20)
+    labelmainframe.grid(row=0,column=0,sticky="ns",padx=20,pady=20)
 
-    newclientregister = ttk.Button(labelmainframe, text= "Nuevo Cliente",command=lambda: submition_button(window))
+    newclientregister = ttk.Button(labelmainframe, text= "Nuevo Cliente",command= NewClient)
     newclientregister.grid(row=0,column=0,sticky="news",padx=20,pady=20);
 
     mode_switch = ttk.Checkbutton(labelmainframe,text="Apariencia",style="Switch",command=lambda: theme_mode(mode_switch,theme_style))
     mode_switch.grid(row=1,column=0,padx=20,pady=20,sticky="nsew")
 
     lookup_button = ttk.Button(labelmainframe,text="Busqueda de Cliente",command=lookupclient_button)
-    lookup_button.grid(row=0,column=2,sticky="news",padx=20,pady=20)
+    lookup_button.grid(row=0,column=1,sticky="news",padx=20,pady=20)
 
     exitbutton = ttk.Button(labelmainframe,text="Salir",command=endcode)
-    exitbutton.grid(row=1,column=2,sticky="news",padx=20,pady=20);
+    exitbutton.grid(row=1,column=1,sticky="news",padx=20,pady=20);
+    
+    database_location = ttk.Button(labelmainframe,text="Path Base de datos",command=pathdatabase)
+    database_location.grid(row=2,column=0,sticky="NEWS",padx=10,pady=10)
+    
     window.protocol("WM_DELETE_WINDOW",endcode)
+    
 
     window.mainloop()
 

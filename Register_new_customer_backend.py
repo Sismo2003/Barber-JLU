@@ -7,9 +7,16 @@ import datetime
 
 
 
+
 def RepeatedClient (ClientName,PhoneNumber,email):
     try:
-        with open("database.json", "r") as file:
+        with open("config.json","r") as file:
+            path = json.load(file);
+    except:
+        print("La dirrecion de la base de datos no existe.")
+    ########################################
+    try:
+        with open(path.get("DatabasePath"), "r") as file:
             main = json.load(file)
         JsonList = main;
     except:
@@ -22,23 +29,35 @@ def RepeatedClient (ClientName,PhoneNumber,email):
         return True
     else:
         return False
+
+
 def addingdatabase(client,barber,style,products,birthday,phoneNumber,observations,email,services,frequency):
-    client = client.title();
-    barber = barber.title();
-    style = style.capitalize();
-    products = products.title();
-    observations =observations.capitalize();
-    email = email.lower();
-    barber = barber.title();
-    frequency = frequency.title();
-    todayday = datetime.date.today()
-    last_visit = f"{todayday}"
-    Parameter = RepeatedClient(client,phoneNumber,email)
+    try:
+        with open("config.json","r") as file:
+           path = json.load(file);
+    except:
+        print("La dirrecion de la base de datos no existe.")
+    
+    try:
+        client = client.title();
+        barber = barber.title();
+        style = style.capitalize();
+        products = products.title();
+        observations =observations.capitalize();
+        email = email.lower();
+        barber = barber.title();
+        frequency = frequency.title();
+        todayday = datetime.date.today()
+        last_visit = f"{todayday}"
+        Parameter = RepeatedClient(client,phoneNumber,email)
+    except:
+        messagebox.showwarning("Error al encontrar la base de datos.", "La base de datos no fue encontrada, revisa que exista en tus archivos.")
+
     if Parameter == False:
         try:
-            with open("database.json", "r") as file:
+            with open(path.get("DatabasePath"), "r") as file:
                 main = json.load(file)
-        except FileNotFoundError:
+        except:
              messagebox.showwarning("Error al encontrar la base de datos.", "La base de datos no fue encontrada, revisa que exista en tus archivos.")
         try:
             data = {
@@ -55,7 +74,7 @@ def addingdatabase(client,barber,style,products,birthday,phoneNumber,observation
                 "Visitas" : last_visit
             }
             main.append(data)
-            with open("database.json", "w") as file:
+            with open(path.get("DatabasePath"), "w") as file:
                 json.dump(main,file,indent=4)
         except:
             messagebox.showwarning("Error en la Base De Datos","No fue possible agregar al cliente.")
@@ -63,12 +82,19 @@ def addingdatabase(client,barber,style,products,birthday,phoneNumber,observation
 
     elif True:  
         messagebox.showwarning("Cliente Repetido","Actualmente existe un cliente con la misma información digitada, trata de editar la información del cliente.",)
-def Lookup ():
 
+
+def Lookup ():
+    try:
+        with open("config.json","r") as file:
+           path = json.load(file);
+    except:
+        print("La dirrecion de la base de datos no existe.")
+    
     print("Deseas buscar al cliente por: \n1.Nombre\n2.Numero de Telefono\n")
     Option=input(">>> ")
     if(Option == 1):
-        with open("database.json", "r") as file:
+        with open(path.get("DatabasePath"), "r") as file:
             main = json.load(file)
         JsonList = main;
         try: 
@@ -82,7 +108,7 @@ def Lookup ():
             print("Error la lista de clientes esta vacia.")
 
     elif(Option == 2 ):
-        with open("database.json", "r") as file:
+        with open(path.get("DatabasePath"), "r") as file:
             main = json.load(file)
             JsonList = main;
         try: 
