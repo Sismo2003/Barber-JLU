@@ -76,13 +76,14 @@ def addingdatabase(client,barber,style,products,birthday,phoneNumber,observation
             main.append(data)
             with open(path.get("DatabasePath"), "w") as file:
                 json.dump(main,file,indent=4)
+                return True;
         except:
             messagebox.showwarning("Error en la Base De Datos","No fue possible agregar al cliente.")
 
 
     elif True:  
         messagebox.showwarning("Cliente Repetido","Actualmente existe un cliente con la misma información digitada, trata de editar la información del cliente.",)
-
+        return False;
 
 def Lookup ():
     try:

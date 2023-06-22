@@ -27,8 +27,7 @@ def load_data (treeview,toppinglist):
         with open("config.json","r") as file:
            path = json.load(file);
     except:
-        print("La dirrecion de la base de datos no existe.")
-        
+        print("Error al cargar el config.json")
     try:
         with open(path.get("DatabasePath"), "r") as file:
             main = json.load(file)
@@ -40,9 +39,10 @@ def load_data (treeview,toppinglist):
         for value_tuple in list_value[0:]:
             treeview.insert('',tkr.END,values=value_tuple)
     except:
-        print("Error al cargar la base de datos")
+        print("Error al cargar la base de datos.")
+        return True
+       #messagebox.showerror("Error en la Base de datos","Hubo un error al cargar la base de datos, verifique que el path sea el correcto.")
         
-
 
 def lookupclient_button():
     window.withdraw()
@@ -84,7 +84,7 @@ def lookupclient_button():
     email_entry.grid(row=5,column=0,padx=10,pady=10,sticky="ew")
 
     button_entry = ttk.Button(lookupframe,text="Buscar")
-    button_entry.grid(row=6,column=0,sticky="nsew")
+    button_entry.grid(row=6,column=0,sticky="nsew",padx=20,pady=20)
 
     returntomenu_button = ttk.Button(lookupframe,text="Regresar al menu",command=lambda: returntomenu(showdatawindow))
     returntomenu_button.grid(row=7,column=0,padx=20,pady=20,sticky="nsew")
@@ -94,13 +94,17 @@ def lookupclient_button():
     treeframe = ttk.Frame(frame)
     treeframe.grid(row=0,column=1,pady=10)
 
+    
     treescroll_y =ttk.Scrollbar(treeframe)
     treescroll_y.pack(side="right",fill="y")
     treeview_y = ttk.Treeview(treeframe,show="headings",yscrollcommand=treescroll_y.set,columns=colms,height=12)
     treescroll_y.config(command=treeview_y.yview)
     treeview_y.pack()
     
-
+    
+    treescroll_x = ttk.Scrollbar(treeframe)
+    treescroll_x.pack(side="bottom",fill="x")
+    
     treeview_y.column("Nombre",width=90)
     treeview_y.column("Fecha de Nacimiento",width=90)
     treeview_y.column("Telefono",width=80)
@@ -112,14 +116,15 @@ def lookupclient_button():
     treeview_y.column("Servicios alternos",width=100)
     treeview_y.column("Observaciones",width=180)
     treeview_y.column("Visitas",width=120)
-    
-
+   
     #treescroll_x = ttk.Scrollbar(treeframe)
     #treescroll_x.pack(side="bottom",fill="x")
     #treeview_x = ttk.Treeview(treeframe,show="headings",columns=colms,height=12)
     #treescroll_x.config(command=treeview_x.xview)
-    #treeview_x.pack()
+   
+    
     load_data(treeview_y,colms)
+  
     showdatawindow.protocol("WM_DELETE_WINDOW",endcode)
     showdatawindow.mainloop()
 
@@ -156,8 +161,14 @@ def NewClient():
         #print(f"Frecuencia de corte: {hairCutFrequency}  Productos ocurrentes: {hairProducts}")
         #print(f"Corte: {hairCutStyle}   Barbero: {barberName}")
         #print(f"Servios alternos: {alternaveServices}  observaciones: {observations}")
-        addingdatabase(final_client,barberName,hairCutStyle,hairProducts,birthday,phoneNumber,observations,email,alternaveServices,hairCutFrequency)
-
+    
+        answer =  addingdatabase(final_client,barberName,hairCutStyle,hairProducts,birthday,phoneNumber,observations,email,alternaveServices,hairCutFrequency)
+        if(answer): 
+            msgbox =  messagebox.askquestion(title="Cliente registrado con exito", message=f"El cliente \" {firstName} {lastName} \"  Fue registrado con exito. Deseas volver al menu principal?")
+            if(msgbox == "yes"):
+                returntomenu(newclientWindow)
+            
+        
  
 
     #Main Window
@@ -275,19 +286,27 @@ def NewClient():
 
 def pathdatabase ():
     def cambiopath():
-        with open("config.json","r") as configfile:
-           path = json.load(configfile);
-        print(path.get("DatabasePath"))
-        path['DatabasePath'] = entry_base.get()
-        with open("config.json","w") as configfile:
-            json.dump(path,configfile,indent=4)
+        try:
+            with open("config.json","r") as configfile:
+                path = json.load(configfile);
+            path['DatabasePath'] = entry_base.get()
+            with open("config.json","w") as configfile:
+                json.dump(path,configfile,indent=4)
+            msgbox = messagebox.askquestion(title="Base de datos", message=f"La nueva dirreción de la base de dato fue registrada con EXITO. Deseas volver al menu principal?")
+            if(msgbox == "yes"):
+                returntomenu(pathwindow)
+        except:
+            messagebox.showerror("Error al cambiar la base de datos")
             
     window.withdraw()
     pathwindow = tkr.Toplevel()
     pathwindow.title("Dirrecion de Base de Datos")
     pathmainframe = ttk.Frame(pathwindow)
     pathmainframe.pack()
-
+    with open("config.json","r") as configfile:
+                path = json.load(configfile);
+    footer_label = ttk.Label(pathmainframe,text=f"Path: {path['DatabasePath']}")
+    footer_label.grid(column=0,row=3,sticky="EN",padx=5,pady=5)
 
     base_text=ttk.Label(pathmainframe,text="Path")
     base_text.grid(column=0,row=0,padx=10,pady=10);
