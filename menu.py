@@ -90,20 +90,17 @@ def lookupclient_button():
     returntomenu_button.grid(row=7,column=0,padx=20,pady=20,sticky="nsew")
 
     colms = ("Nombre","Fecha de Nacimiento","Telefono","Email","Barber","Corte","Frecuencia de corte","Productos","Servicios alternos","Observaciones","Visitas")
+    def configure_scrollbars(event):
+    # Configurar las barras de desplazamiento para que se ajusten al tamaño del Treeview
+        treeview_y.update_idletasks()
+        vertical_scrollbar.configure(orient="vertical", command=treeview_y.yview)
+        horizontal_scrollbar.configure(orient="horizontal", command=treeview_y.xview)
+        treeview_y.configure(yscrollcommand=vertical_scrollbar.set, xscrollcommand=horizontal_scrollbar.set)
 
     treeframe = ttk.Frame(frame)
-    treeframe.grid(row=0,column=1,pady=10)
+    treeframe.grid(row=0, column=1, pady=10)
 
-    
-    treescroll_y =ttk.Scrollbar(treeframe)
-    treescroll_y.pack(side="right",fill="y")
-    treeview_y = ttk.Treeview(treeframe,show="headings",yscrollcommand=treescroll_y.set,columns=colms,height=12)
-    treescroll_y.config(command=treeview_y.yview)
-    treeview_y.pack()
-    
-    
-    treescroll_x = ttk.Scrollbar(treeframe)
-    treescroll_x.pack(side="bottom",fill="x")
+    treeview_y = ttk.Treeview(treeframe, show="headings", columns=colms, height=12)
     
     treeview_y.column("Nombre",width=90)
     treeview_y.column("Fecha de Nacimiento",width=90)
@@ -117,13 +114,34 @@ def lookupclient_button():
     treeview_y.column("Observaciones",width=180)
     treeview_y.column("Visitas",width=120)
    
+
+    scrollbar = ttk.Scrollbar(frame,orient=tkr.horizontal,command=treeview_y.xview)
+    treeview_y.pack(side="left", fill="both", expand=True)
+    scrollbar.grid(row=1,column=0,sticky="new")
+    
+    treeview_y.configure(xscroll=scrollbar.set)
+    
+
+
+
+
+
+    load_data(treeview_y,colms)
+    
+    #treescroll_y =ttk.Scrollbar(treeframe)
+    #treescroll_y.pack(side="right",fill="y")
+    #treeview_y = ttk.Treeview(treeframe,show="headings",yscrollcommand=treescroll_y.set,columns=colms,height=12)
+    #treescroll_y.config(command=treeview_y.yview)
+    #treeview_y.pack()
+    #treeview_y.configure(xscrollcommand=Scrollbar.set)
+    
+    
     #treescroll_x = ttk.Scrollbar(treeframe)
     #treescroll_x.pack(side="bottom",fill="x")
     #treeview_x = ttk.Treeview(treeframe,show="headings",columns=colms,height=12)
     #treescroll_x.config(command=treeview_x.xview)
    
     
-    load_data(treeview_y,colms)
   
     showdatawindow.protocol("WM_DELETE_WINDOW",endcode)
     showdatawindow.mainloop()
