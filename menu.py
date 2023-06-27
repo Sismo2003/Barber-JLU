@@ -115,11 +115,12 @@ def lookupclient_button():
     treeview_y.column("Visitas",width=120)
    
 
-    scrollbar = ttk.Scrollbar(frame,orient=tkr.horizontal,command=treeview_y.xview)
-    treeview_y.pack(side="left", fill="both", expand=True)
-    scrollbar.grid(row=1,column=0,sticky="new")
-    
+    scrollbar = ttk.Scrollbar(treeframe,orient="horizontal",command=treeview_y.xview)
     treeview_y.configure(xscroll=scrollbar.set)
+    
+    scrollbar.grid(row=1,column=0,sticky="new")
+    treeview_y.grid(row=0, column=0, sticky="nsew")
+    
     
 
 

@@ -35,7 +35,10 @@ def item_selected(event):
         record = item['values']
         showinfo(title='Information', message=','.join(record))
         
+        
 tree.bind('<<TreeviewSelect>>', item_selected)
+
+
 scrollbar = ttk.Scrollbar(frame, orient=tk.HORIZONTAL, command=tree.xview)
 tree.configure(xscroll=scrollbar.set)
 tree.grid(row=0, column=0, sticky="nsew")
