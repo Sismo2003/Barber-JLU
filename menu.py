@@ -44,12 +44,151 @@ def load_data (treeview,toppinglist):
        #messagebox.showerror("Error en la Base de datos","Hubo un error al cargar la base de datos, verifique que el path sea el correcto.")
         
 
+
+
+
+def ClientEdit(record):
+    def returnTopObject():
+        top.destroy()
+        lookupclient_button()
+    
+    top = tkr.Toplevel()
+    top.title("Edicion de datos")
+    frame = ttk.Frame(top)
+    frame.pack()
+    wetdgeFrame = ttk.Frame(frame)
+    wetdgeFrame.pack()
+    client_info_frame = ttk.LabelFrame(wetdgeFrame,text="Información del Cliente")
+    client_info_frame.grid(row=0,column=0,sticky="news", padx=20,pady=10)
+
+
+    first_name_label = ttk.Label(client_info_frame,text="Nombre: ")
+    first_name_label.grid(row=0,column=0)
+    first_name_entry = ttk.Entry(client_info_frame)
+    first_name_entry.insert(0,f"{record[0]}")
+    first_name_entry.grid(row=1,column=0)
+
+
+    #last_name_entry.grid(row=1,column=1)
+
+
+    final_result = tkr.StringVar()
+    birthday_label = ttk.Label(client_info_frame,text="Fecha de Nacimiento: ")
+    birthday_label.grid(row=0,column=3)
+    birthday_entry = DateEntry(client_info_frame,selectmode="day",textvariable=final_result)
+    birthday_entry.insert(0,f"{record[1]}")
+    birthday_entry.grid(row=1, column= 3, padx=20)
+
+    phone_number_label = ttk.Label(client_info_frame,text="Numero Telefonico: ")
+    phone_number_label.grid(row=0 ,column=1)
+    phone_number_entry = ttk.Entry(client_info_frame)
+    phone_number_entry.insert(0,f"{record[2]}")
+    phone_number_entry.grid(row=1,column=1)
+
+    email_label = ttk.Label(client_info_frame,text="Correo Electronico:")
+    email_label.grid(row=2,column=0)
+    email_entry = ttk.Entry(client_info_frame)
+    email_entry.insert(0,f"{record[3]}")
+    email_entry.grid(row=3,column=0)
+
+    for widget in client_info_frame.winfo_children():
+        widget.grid_configure(padx=10,pady=5);
+
+    ######################### #Barber Information #########################
+
+    barber_information = ttk.LabelFrame(wetdgeFrame,text="Información del Corte")
+    barber_information.grid(row=1,column=0,sticky="news", padx=20,pady=10)
+
+    barber_name_label = ttk.Label(barber_information,text="Nombre del Barbero")
+    barber_name_label.grid(row=2,column=0)
+    barber_name_entry = ttk.Combobox(barber_information, values=["Salvador Venegas","Lalo","Otro..."])
+    barber_name_entry.insert(0,f"{record[4]}")
+    barber_name_entry.grid(row=3,column=0)
+
+    hair_cut_style_label = ttk.Label(barber_information,text="Estilo de Corte: ")
+    hair_cut_style_label.grid(row=0,column=0)
+    hair_cut_style_entry = ttk.Entry(barber_information)
+    hair_cut_style_entry.insert(0,f"{record[5]}")
+    hair_cut_style_entry.grid(row=1,column=0);
+
+    hair_cut_frequency_label=ttk.Label(barber_information,text="Frecuencia de Corte: ")
+    hair_cut_frequency_label.grid(row=0,column=1)
+    hair_cut_frequency_entry = ttk.Entry(barber_information)
+    hair_cut_frequency_entry.insert(0,f"{record[6]}")
+    hair_cut_frequency_entry.grid(row=1,column=1)
+
+    with open("hair_products.json", "r") as file:
+        hair_products_list = json.load(file)
+
+    with open("alternave_services.json", "r") as file:
+        alternave_services_json = json.load(file)
+        
+    hair_products_label = ttk.Label(barber_information,text="Productos Utilizados: ")
+    hair_products_label.grid(row=0,column=2);
+    hair_products_combobox = ttk.Combobox(barber_information, values=hair_products_list)
+    hair_products_combobox.insert(0,f"{record[7]}")
+    hair_products_combobox.grid(row=1,column=2)
+
+
+    alternave_services_label = ttk.Label(barber_information,text="Servicios Alternos")
+    alternave_services_label.grid(row=2,column=1)
+    alternave_services_combobox = ttk.Combobox(barber_information, values=alternave_services_json)
+    alternave_services_combobox.insert(0,f"{record[8]}")
+    alternave_services_combobox.grid(row=3,column=1)
+
+
+
+    for widget in barber_information.winfo_children():
+        widget.grid_configure(padx=10,pady=5);
+
+
+    ############ OBSERVATIONS ###########
+
+    client_observations_frame = ttk.LabelFrame(wetdgeFrame,text="Observaciones del Cliente")
+    client_observations_frame.grid(row=3,column=0,sticky="news", padx=20,pady=10)
+
+    observations_label = ttk.Label(client_observations_frame,text="Observaciones :")
+    observations_label.grid(row=0,column=0)
+    observations_entry = ttk.Entry(client_observations_frame)
+    observations_entry.insert(0,f"{record[9]}")
+    observations_entry.grid(row=1,column=0)
+    for widget in client_observations_frame.winfo_children():
+        widget.grid_configure(padx=100,pady=5);
+
+    #####     BUTTONS     #####
+    submtion_button = ttk.Button(wetdgeFrame,text="Guardar datos")
+    submtion_button.grid(row=0,column=2,sticky="news",padx=20,pady=20)
+
+    
+    menu_button = ttk.Button(wetdgeFrame,text="Salir",command=returnTopObject)
+    menu_button.grid(row=1,column=2,sticky="news",padx=20,pady=20)
+
+    wetdgeFrame.mainloop();
+
+
 def lookupclient_button():
-    window.withdraw()
+
+
+    def item_select():
+        selected_item = treeview_y.focus()
+        if selected_item:
+            item = treeview_y.item(selected_item)
+            record = item['values']
+            showdatawindow.destroy()
+            ClientEdit(record)
+
+    def on_focusOut (event,variable ,text1):
+        if variable.get() == "":
+            variable.insert(0,text1)
+
+
+    def on_focuIn(event, variable, text1):
+        if variable.get() == text1:
+            variable.delete(0,"end")
+
+
     showdatawindow = tkr.Toplevel()
     showdatawindow.title("Mostrar Cliente");
-    #showdatawindow.geometry("1080x480")
-
     frame = ttk.Frame(showdatawindow)
     frame.pack();
     
@@ -60,17 +199,18 @@ def lookupclient_button():
     name_label.grid(row=0,column=0)
     name_entry = ttk.Entry(lookupframe)
     name_entry.insert(0,"Cristiano Gomes")
-    name_entry.bind("<FocusIn>", lambda e:name_entry.delete(0,"end"))
-    name_entry.bind("<FocusOut>",lambda e:name_entry.insert(0,"Cristiano Gomes"))
+    name_entry.bind("<FocusIn>", lambda event :on_focuIn(event,name_entry,"Cristiano Gomes"))
+    name_entry.bind("<FocusOut>",lambda event :on_focusOut(event,name_entry,"Cristiano Gomes"))
     name_entry.grid(row=1,column=0,sticky="ew",padx=20,pady=20)
+
 
 
     phonenumber_label = ttk.Label(lookupframe,text="Numero Telefonico")
     phonenumber_label.grid(row=2,column=0)
     phonenumber_entry = ttk.Entry(lookupframe)
     phonenumber_entry.insert(0,"+52 33 1234 5678")
-    phonenumber_entry.bind("<FocusIn>",lambda e:phonenumber_entry.delete(0,"end"))
-    phonenumber_entry.bind("<FocusOut>",lambda e:phonenumber_entry.insert(0,"+52 33 1234 5678"))
+    phonenumber_entry.bind("<FocusIn>",lambda event :on_focuIn(event,phonenumber_entry,"+52 33 1234 5678"))
+    phonenumber_entry.bind("<FocusOut>",lambda event :on_focusOut(event,phonenumber_entry,"+52 33 1234 5678"))
     phonenumber_entry.grid(row=3,column=0,padx=20,pady=20,sticky="ew")
 
 
@@ -79,26 +219,27 @@ def lookupclient_button():
     email_label.grid(row=4,column=0)
     email_entry = ttk.Entry(lookupframe)
     email_entry.insert(0,"example@dominio.com")
-    email_entry.bind("<FocusIn>",lambda e:email_entry.delete(0,"end"))
-    email_entry.bind("<FocusOut>",lambda e:email_entry.insert(0,"example@dominio.com"))
+    email_entry.bind("<FocusIn>",lambda event :on_focuIn(event,email_entry,"example@dominio.com"))
+    email_entry.bind("<FocusOut>",lambda event :on_focusOut(event,email_entry,"example@dominio.com"))
     email_entry.grid(row=5,column=0,padx=10,pady=10,sticky="ew")
 
-    button_entry = ttk.Button(lookupframe,text="Buscar")
+    button_entry = ttk.Button(lookupframe,text="Buscar",command=ClientEdit)
     button_entry.grid(row=6,column=0,sticky="nsew",padx=20,pady=20)
 
+    
+    edit_button = ttk.Button(lookupframe,text="Editar",command=item_select)
+    edit_button.grid(row=7,column=0,padx=20,pady=20,sticky="NSEW")
+
+    erase_button = ttk.Button(lookupframe,text="Borrar")
+    erase_button.grid(row=8,column=0,padx=20,pady=20,sticky="NSEW")
+
     returntomenu_button = ttk.Button(lookupframe,text="Regresar al menu",command=lambda: returntomenu(showdatawindow))
-    returntomenu_button.grid(row=7,column=0,padx=20,pady=20,sticky="nsew")
+    returntomenu_button.grid(row=9,column=0,padx=20,pady=20,sticky="nsew")
 
     colms = ("Nombre","Fecha de Nacimiento","Telefono","Email","Barber","Corte","Frecuencia de corte","Productos","Servicios alternos","Observaciones","Visitas")
-    def configure_scrollbars(event):
-    # Configurar las barras de desplazamiento para que se ajusten al tamaño del Treeview
-        treeview_y.update_idletasks()
-        vertical_scrollbar.configure(orient="vertical", command=treeview_y.yview)
-        horizontal_scrollbar.configure(orient="horizontal", command=treeview_y.xview)
-        treeview_y.configure(yscrollcommand=vertical_scrollbar.set, xscrollcommand=horizontal_scrollbar.set)
-
+    
     treeframe = ttk.Frame(frame)
-    treeframe.grid(row=0, column=1, pady=10)
+    treeframe.grid(row=0, column=1,padx=5, pady=5)
 
     treeview_y = ttk.Treeview(treeframe, show="headings", columns=colms, height=12)
     
@@ -121,30 +262,14 @@ def lookupclient_button():
     scrollbar.grid(row=1,column=0,sticky="new")
     treeview_y.grid(row=0, column=0, sticky="nsew")
     
-    
 
 
-
-
-
+    #treeview_y.bind('<<TreeviewSelect>>', item_select)
     load_data(treeview_y,colms)
-    
-    #treescroll_y =ttk.Scrollbar(treeframe)
-    #treescroll_y.pack(side="right",fill="y")
-    #treeview_y = ttk.Treeview(treeframe,show="headings",yscrollcommand=treescroll_y.set,columns=colms,height=12)
-    #treescroll_y.config(command=treeview_y.yview)
-    #treeview_y.pack()
-    #treeview_y.configure(xscrollcommand=Scrollbar.set)
-    
-    
-    #treescroll_x = ttk.Scrollbar(treeframe)
-    #treescroll_x.pack(side="bottom",fill="x")
-    #treeview_x = ttk.Treeview(treeframe,show="headings",columns=colms,height=12)
-    #treescroll_x.config(command=treeview_x.xview)
-   
-    
-  
-    showdatawindow.protocol("WM_DELETE_WINDOW",endcode)
+
+
+    showdatawindow.resizable(False, False)
+    #showdatawindow.protocol("WM_DELETE_WINDOW",endcode)
     showdatawindow.mainloop()
 
 
@@ -154,6 +279,15 @@ def theme_mode (interruptor,style):
         style.theme_use("forest-light")
     else:
         style.theme_use("forest-dark")
+
+
+def visit():
+    top = tkr.Toplevel()
+    top.title("Registro de visita de cliente")
+    visitmainframe = tkr.Frame(top)
+    visitmainframe.pack()
+    
+    visitmainframe.mainloop()
 
 
 def NewClient():
@@ -191,15 +325,14 @@ def NewClient():
  
 
     #Main Window
-    window.withdraw()
     newclientWindow = tkr.Toplevel()
     newclientWindow.title("Registrar un Nuevo Cliente ") 
-    newclientmainframe = ttk.Frame(newclientWindow);
-    newclientmainframe.pack()
+    wetdgeFrame = ttk.Frame(newclientWindow);
+    wetdgeFrame.pack()
 
 
     ##########################Client information #################################
-    client_info_frame = ttk.LabelFrame(newclientmainframe,text="Información del Cliente")
+    client_info_frame = ttk.LabelFrame(wetdgeFrame,text="Información del Cliente")
     client_info_frame.grid(row=0,column=0,sticky="news", padx=20,pady=10)
 
 
@@ -235,7 +368,7 @@ def NewClient():
 
     ######################### #Barber Information #########################
 
-    barber_information = ttk.LabelFrame(newclientmainframe,text="Información del Corte")
+    barber_information = ttk.LabelFrame(wetdgeFrame,text="Información del Corte")
     barber_information.grid(row=1,column=0,sticky="news", padx=20,pady=10)
 
     hair_cut_style_label = ttk.Label(barber_information,text="Estilo de Corte: ")
@@ -277,7 +410,7 @@ def NewClient():
 
     ############ OBSERVATIONS ###########
 
-    client_observations_frame = ttk.LabelFrame(newclientmainframe,text="Observaciones del Cliente")
+    client_observations_frame = ttk.LabelFrame(wetdgeFrame,text="Observaciones del Cliente")
     client_observations_frame.grid(row=3,column=0,sticky="news", padx=20,pady=10)
 
     observations_label = ttk.Label(client_observations_frame,text="Observaciones :")
@@ -288,16 +421,18 @@ def NewClient():
         widget.grid_configure(padx=100,pady=5);
 
     #####     BUTTONS     #####
-    submtion_button = ttk.Button(newclientmainframe,text="Enviar Datos",command=submtion_data)
+    submtion_button = ttk.Button(wetdgeFrame,text="Enviar Datos",command=submtion_data)
     submtion_button.grid(row=0,column=2,sticky="news",padx=20,pady=20)
 
-    menu_button = ttk.Button(newclientmainframe,text="Menu Principal",command=lambda: returntomenu(newclientWindow))
+    menu_button = ttk.Button(wetdgeFrame,text="Menu Principal",command=lambda: returntomenu(newclientWindow))
     menu_button.grid(row=1,column=2,sticky="news",padx=20,pady=20)
 
     newclientWindow.protocol("WM_DELETE_WINDOW",endcode)
 
-    #exit_button = tkr.Button(newclientmainframe,text="Salir",command=ebf);
+    #exit_button = tkr.Button(wetdgeFrame,text="Salir",command=ebf);
     #exit_button.grid(row=2,column=2,sticky="news",padx=20,pady=20) 
+
+
 
     newclientWindow.mainloop()
 
@@ -380,25 +515,31 @@ def mainmenu():
     mainFrame = ttk.Frame(frame)
     mainFrame.grid(row=1,column=0,padx=10,pady=10);
 
-
-
     labelmainframe = ttk.LabelFrame(mainFrame,text="Opciones")
     labelmainframe.grid(row=0,column=0,sticky="ns",padx=20,pady=20)
 
-    newclientregister = ttk.Button(labelmainframe, text= "Nuevo Cliente",command= NewClient)
-    newclientregister.grid(row=0,column=0,sticky="news",padx=20,pady=20);
 
-    mode_switch = ttk.Checkbutton(labelmainframe,text="Apariencia",style="Switch",command=lambda: theme_mode(mode_switch,theme_style))
-    mode_switch.grid(row=1,column=0,padx=20,pady=20,sticky="nsew")
+   #############################################################################################
+
+    newclientregister = ttk.Button(labelmainframe, text= "Nuevo Cliente",command= NewClient)
+    newclientregister.grid(row=0,column=0,sticky="NEWS",padx=20,pady=20);
+
+    visitclient_button = ttk.Button(labelmainframe,text="Registrar Visita de Cliente",command=visit)
+    visitclient_button.grid(row=0,column=1,padx=20,pady=20,sticky="NEWS")
+
 
     lookup_button = ttk.Button(labelmainframe,text="Busqueda de Cliente",command=lookupclient_button)
-    lookup_button.grid(row=0,column=1,sticky="news",padx=20,pady=20)
+    lookup_button.grid(row=1,column=0,sticky="NEWS",padx=20,pady=20)
+
 
     exitbutton = ttk.Button(labelmainframe,text="Salir",command=endcode)
-    exitbutton.grid(row=1,column=1,sticky="news",padx=20,pady=20);
+    exitbutton.grid(row=1,column=1,sticky="NEWS",padx=20,pady=20);
     
+    mode_switch = ttk.Checkbutton(labelmainframe,text="Apariencia",style="Switch",command=lambda: theme_mode(mode_switch,theme_style))
+    mode_switch.grid(row=2,column=0,padx=20,pady=20,sticky="NEWS")
+
     database_location = ttk.Button(labelmainframe,text="Path Base de datos",command=pathdatabase)
-    database_location.grid(row=2,column=0,sticky="NEWS",padx=10,pady=10)
+    database_location.grid(row=2,column=1,sticky="NEWS",padx=10,pady=10)
     
     window.protocol("WM_DELETE_WINDOW",endcode)
     

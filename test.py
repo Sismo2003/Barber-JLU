@@ -1,77 +1,52 @@
-# Python program to illustrate the usage of
-# treeview scrollbars using tkinter
-
-
-from tkinter import ttk
 import tkinter as tk
+from tkinter import ttk
+from tkinter.messagebox import showinfo
+root = tk.Tk()
+root.title('Treeview demo')
+root.geometry('620x300')
+columns = ('first_name', 'last_name', 'email','col1','col2','col3','col4','col5','col6','col7','col8')
 
-# Creating tkinter window
-window = tk.Tk()
-window.resizable(width = 1, height = 1)
+frame = ttk.Frame()
+frame.grid(row=0, column=0, sticky="nsew")
+frame.columnconfigure(0, weight=1)
+frame.rowconfigure(0, weight=1)
+frame.rowconfigure(1, weight=1)
 
-# Using treeview widget
-treev = ttk.Treeview(window, selectmode ='browse')
+tree = ttk.Treeview(frame, columns=columns, show='headings')
+tree.heading('first_name', text='First Name')
+tree.heading('last_name', text='Last Name')
+tree.heading('email', text='Email')
+tree.heading('col1', text='col1')
+tree.heading('col2', text='col2')
+tree.heading('col3', text='col3')
+tree.heading('col4', text='col4')
+tree.heading('col5', text='col5')
+tree.heading('col6', text='col5')
+tree.heading('col7', text='col7')
+tree.heading('col8', text='col8')
+contacts = []
+for n in range(1, 100):
+    contacts.append((f'first {n}', f'last {n}', f'email{n}@example.com'))
+for contact in contacts:
+    tree.insert('', tk.END, values=contact)
+def item_selected(event):
+    for selected_item in tree.selection():
+        item = tree.item(selected_item)
+        record = item['values']
+        showinfo(title='Information', message=','.join(record))
+        
+        
+tree.bind('<<TreeviewSelect>>', item_selected)
 
-# Calling pack method w.r.to treeview
-treev.pack(side ='right')
 
-# Constructing vertical scrollbar
-# with treeview
-verscrlbar = ttk.Scrollbar(window,
-						orient ="vertical",
-						command = treev.yview)
+scrollbar = ttk.Scrollbar(frame, orient=tk.HORIZONTAL, command=tree.xview)
+tree.configure(xscroll=scrollbar.set)
+tree.grid(row=0, column=0, sticky="nsew")
+scrollbar.grid(row=1, column=0, sticky="new")
 
-# Calling pack method w.r.to vertical
-# scrollbar
-verscrlbar.pack(side ='right', fill ='x')
 
-# Configuring treeview
-treev.configure(xscrollcommand = verscrlbar.set)
 
-# Defining number of columns
-treev["columns"] = ("1", "2", "3")
 
-# Defining heading
-treev['show'] = 'headings'
-
-# Assigning the width and anchor to the
-# respective columns
-treev.column("1", width = 90, anchor ='c')
-treev.column("2", width = 90, anchor ='se')
-treev.column("3", width = 90, anchor ='se')
-
-# Assigning the heading names to the
-# respective columns
-treev.heading("1", text ="Name")
-treev.heading("2", text ="Sex")
-treev.heading("3", text ="Age")
-
-# Inserting the items and their features to the
-# columns built
-treev.insert("", 'end', text ="L1",
-			values =("Nidhi", "F", "25"))
-treev.insert("", 'end', text ="L2",
-			values =("Nisha", "F", "23"))
-treev.insert("", 'end', text ="L3",
-			values =("Preeti", "F", "27"))
-treev.insert("", 'end', text ="L4",
-			values =("Rahul", "M", "20"))
-treev.insert("", 'end', text ="L5",
-			values =("Sonu", "F", "18"))
-treev.insert("", 'end', text ="L6",
-			values =("Rohit", "M", "19"))
-treev.insert("", 'end', text ="L7",
-			values =("Geeta", "F", "25"))
-treev.insert("", 'end', text ="L8",
-			values =("Ankit", "M", "22"))
-treev.insert("", 'end', text ="L10",
-			values =("Mukul", "F", "25"))
-treev.insert("", 'end', text ="L11",
-			values =("Mohit", "M", "16"))
-treev.insert("", 'end', text ="L12",
-			values =("Vivek", "M", "22"))
-treev.insert("", 'end', text ="L13",
-			values =("Suman", "F", "30"))
-
-# Calling mainloop
-window.mainloop()
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0, weight=1)
+root.mainloop()
