@@ -1,29 +1,44 @@
 import tkinter as tk
 from tkinter import ttk
-from tkinter import messagebox
 
-def show_selected_data():
-    selected_item = treeview_y.focus()  # Obtener el elemento seleccionado
-    if selected_item:
-        item_data = treeview_y.item(selected_item, "values")  # Obtener los valores del elemento seleccionado
-        if item_data:
-            data_string = "\n".join(item_data)  # Crear una cadena con los datos
-            messagebox.showinfo("Datos Seleccionados", data_string)  # Mostrar una ventana con los datos
+def search_and_select_value():
+    search_text = search_entry.get()  # Obtener el texto de búsqueda
+    column_index = 1  # Índice de la columna en la que deseas buscar (por ejemplo, 1 para la segunda columna)
+
+    for item in treeview.get_children():
+        item_values = treeview.item(item, "values")
+        if item_values and len(item_values) > column_index:
+            if item_values[column_index] == search_text:
+                treeview.selection_set(item)  # Seleccionar automáticamente el elemento encontrado
+                treeview.focus(item)  # Hacer que el elemento seleccionado sea visible si está fuera de la vista
+
+                # Hacer que el elemento seleccionado sea visible utilizando el método see()
+                treeview.see(item)
+
+                return  # Terminar el bucle al encontrar el valor
 
 root = tk.Tk()
-root.title("Ejemplo Treeview con Ventana de Datos")
+root.title("Buscar, Seleccionar y Mover Scrollbar en Treeview")
 
-treeview_y = ttk.Treeview(root, columns=("Columna1", "Columna2"))
-treeview_y.heading("#1", text="Columna 1")
-treeview_y.heading("#2", text="Columna 2")
+treeview = ttk.Treeview(root, columns=("Columna1", "Columna2"))
+treeview.heading("#1", text="Columna 1")
+treeview.heading("#2", text="Columna 2")
 
 # Agregar elementos al treeview (estos son solo ejemplos)
-treeview_y.insert("", "end", values=("Dato 1A", "Dato 1B"))
-treeview_y.insert("", "end", values=("Dato 2A", "Dato 2B"))
+for i in range(20):
+    treeview.insert("", "end", values=("Valor" + str(i), "Valor" + str(i)))
 
-treeview_y.pack()
+treeview.pack()
 
-button = ttk.Button(root, text="Mostrar Datos Seleccionados", command=show_selected_data)
-button.pack()
+search_entry = ttk.Entry(root)
+search_entry.pack()
+
+search_button = ttk.Button(root, text="Buscar, Seleccionar y Mover Scrollbar", command=search_and_select_value)
+search_button.pack()
+
+# Crear un Scrollbar vertical
+vertical_scrollbar = ttk.Scrollbar(root, orient="vertical", command=treeview.yview)
+treeview.configure(yscrollcommand=vertical_scrollbar.set)
+vertical_scrollbar.pack(side="right", fill="y")
 
 root.mainloop()

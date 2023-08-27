@@ -1,46 +1,4 @@
-[
-    {
-        "Nombre del Cliente": "Angel Ortiz",
-        "Fecha de Nacimiento": "10/2/98",
-        "Whatsapp": "33310220",
-        "Correo Electronico": "ajun@gmail.com",
-        "Nombre del Barbero": "Salvador Venegas",
-        "Estilo de Corte": "Fade",
-        "Frecuencia de Corte": "4 Semanas",
-        "Productos Utilizados": "Gel Para El Cabello",
-        "Servicios Alternos": "Corte de cabello",
-        "Observaciones": "Muchas canas",
-        "Visitas": "1",
-        "Registro": "2023-06-06"
-    },
-    {
-        "Nombre del Cliente": "Karen Valdez",
-        "Fecha de Nacimiento": "6/10/04",
-        "Whatsapp": "4808491028",
-        "Correo Electronico": "karen1@hmsaiol.com",
-        "Nombre del Barbero": "Salvador Venegas",
-        "Estilo de Corte": "Fade",
-        "Frecuencia de Corte": "2 Semanas",
-        "Productos Utilizados": "Gel Para El Cabello",
-        "Servicios Alternos": "Afeitado tradicional",
-        "Observaciones": "Juana",
-        "Visitas": "1",
-        "Registro": "2023-06-06"
-    },
-    {
-        "Nombre del Cliente": "Pedro Gomez",
-        "Fecha de Nacimiento": "12/9/80",
-        "Whatsapp": "4441112233",
-        "Correo Electronico": "pedrogom@gmail.com",
-        "Nombre del Barbero": "Miguel S\u00e1nchez",
-        "Estilo de Corte": "Corte Formal",
-        "Frecuencia de Corte": "4 Semanas",
-        "Productos Utilizados": "Gel para el cabello",
-        "Servicios Alternos": "Rasurado de cuello",
-        "Observaciones": "Pelo fino",
-        "Visitas": "6",
-        "Registro": "2023-06-06"
-    },
+,
     {
         "Nombre del Cliente": "Luisa Mart\u00ednez",
         "Fecha de Nacimiento": "5/12/88",
@@ -52,8 +10,8 @@
         "Productos Utilizados": "Aceite para el cabello",
         "Servicios Alternos": "Lavado de cabello",
         "Observaciones": "Cabello largo",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "Carlos R\u00edos",
@@ -66,8 +24,8 @@
         "Productos Utilizados": "Cera para el cabello",
         "Servicios Alternos": "Recorte de patillas",
         "Observaciones": "Calvicie parcial",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "Ana Gutierrez",
@@ -80,8 +38,8 @@
         "Productos Utilizados": "Aceite para el cabello",
         "Servicios Alternos": "Depilaci\u00f3n de cejas",
         "Observaciones": "Cabello corto",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "Elena Cruz",
@@ -94,8 +52,8 @@
         "Productos Utilizados": "Spray para el cabello",
         "Servicios Alternos": "Lavado de cabello",
         "Observaciones": "Cabello ondulado",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "Ricardo Morales",
@@ -108,8 +66,8 @@
         "Productos Utilizados": "Pomada para el cabello",
         "Servicios Alternos": "Recorte de barba",
         "Observaciones": "Cabello fino",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "Isabel Paredes",
@@ -122,8 +80,8 @@
         "Productos Utilizados": "Aceite para el cabello",
         "Servicios Alternos": "Maquillaje de noche",
         "Observaciones": "Cabello medio",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "Arturo Ram\u00edrez",
@@ -136,8 +94,21 @@
         "Productos Utilizados": "Pomada para el cabello",
         "Servicios Alternos": "Perfilado de barba",
         "Observaciones": "Cabello corto",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
+    },
+    {
+        "Nombre del Cliente": "Andr\u00e9s Vargas",
+        "Fecha de Nacimiento": "12/11/82",
+        "Whatsapp": "3336667776",
+        "Correo Electronico": "andvar@gmail.com",
+        "Nombre del Barbero": "Miguel S\u00e1nchez",
+        "Estilo de Corte": "Corte Pompadour",
+        "Frecuencia de Corte": "4 Semanas",
+        "Productos Utilizados": "Pomada para el cabello",
+        "Servicios Alternos": "Afeitado de barba",
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "Gabriela Nava",
@@ -150,8 +121,8 @@
         "Productos Utilizados": "Gel para el cabello",
         "Servicios Alternos": "Depilaci\u00f3n de cejas",
         "Observaciones": "Cabello corto",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "Hugo Mart\u00ednez",
@@ -164,8 +135,22 @@
         "Productos Utilizados": "Aceite para el cabello",
         "Servicios Alternos": "Afeitado de cabeza",
         "Observaciones": "Barba poblada",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
+    },
+    {
+        "Nombre del Cliente": "Sddsj Hj",
+        "Fecha de Nacimiento": "8/20/23",
+        "Whatsapp": "b",
+        "Correo Electronico": "bh",
+        "Nombre del Barbero": "Hb",
+        "Estilo de Corte": "B",
+        "Frecuencia de Corte": "Hbhbh",
+        "Productos Utilizados": "B",
+        "Servicios Alternos": "h",
+        "Observaciones": "Bh",
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "B Hb Hbh",
@@ -178,8 +163,8 @@
         "Productos Utilizados": "Hbbh",
         "Servicios Alternos": "b",
         "Observaciones": "H",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "J Ubn",
@@ -192,8 +177,8 @@
         "Productos Utilizados": "U",
         "Servicios Alternos": "u",
         "Observaciones": "Un",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "Alexis Ortiz",
@@ -206,8 +191,8 @@
         "Productos Utilizados": "Mom",
         "Servicios Alternos": "Dise\u00f1o de barba",
         "Observaciones": "UNA VERGA",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
+        "Registro": "2023-06-06",
+        "Visitas": 1
     },
     {
         "Nombre del Cliente": "N H",
@@ -220,7 +205,6 @@
         "Productos Utilizados": "H",
         "Servicios Alternos": "h",
         "Observaciones": "H",
-        "Visitas": 1,
-        "Registro": "2023-08-26"
+        "Registro": "2023-08-26",
+        "Visitas": 1
     }
-]
