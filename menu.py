@@ -27,7 +27,7 @@ def on_focuIn(event, variable, text1):
 
 def returntomenu (winclose):
     winclose.destroy()
-    window.deiconify()
+
 
 def load_data (treeview,toppinglist):
     try:
@@ -356,7 +356,7 @@ def lookupclient_button():
     edit_button = ttk.Button(lookupframe,text="Editar",command=item_select)
     edit_button.grid(row=7,column=0,padx=20,pady=20,sticky="NSEW")
 
-    returntomenu_button = ttk.Button(lookupframe,text="Regresar al menu",command=lambda: returntomenu(showdatawindow))
+    returntomenu_button = ttk.Button(lookupframe,text="Regresar al menu",command=lambda  :returntomenu(showdatawindow))
     returntomenu_button.grid(row=9,column=0,padx=20,pady=20,sticky="nsew")
 
     colms = ("Nombre","Fecha de Nacimiento","Telefono","Email","Barber","Corte","Frecuencia de corte","Productos","Servicios alternos","Observaciones","Visitas")
@@ -563,18 +563,19 @@ def NewClient():
 
 def pathdatabase ():
     def cambiopath():
-        try:
-            with open("config.json","r") as configfile:
-                path = json.load(configfile);
-            path['DatabasePath'] = entry_base.get()
-            with open("config.json","w") as configfile:
-                json.dump(path,configfile,indent=4)
-            msgbox = messagebox.askquestion(title="Base de datos", message=f"La nueva dirreción de la base de dato fue registrada con EXITO. Deseas volver al menu principal?")
-            if(msgbox == "yes"):
-                returntomenu(pathwindow)
-        except:
-            messagebox.showerror("Error al cambiar la base de datos")
-            
+        mssgbox = messagebox.askquestion(title="Cambio de PATH base de datos", message="Estas seguro que quieres cambiar la dirrecion de la base de datos? ")
+        if(mssgbox == "yes"):
+            try:
+                with open("config.json","r") as configfile:
+                    path = json.load(configfile);
+                path['DatabasePath'] = entry_base.get()
+                with open("config.json","w") as configfile:
+                    json.dump(path,configfile,indent=4)
+                msgbox = messagebox.askquestion(title="Base de datos", message=f"La nueva dirreción de la base de dato fue registrada con EXITO. Deseas volver al menu principal?")
+                if(msgbox == "yes"):
+                    returntomenu(pathwindow)
+            except:
+                messagebox.showerror("Error al cambiar la base de datos")        
     pathwindow = tkr.Toplevel()
     pathwindow.title("Dirrecion de Base de Datos")
     pathmainframe = ttk.Frame(pathwindow)
@@ -615,22 +616,22 @@ def VisitMark():
     
     
     name_label = ttk.Label(lookupframe,text="Nombre del Cliente")
-    name_label.grid(row=0,column=0)
+    name_label.grid(row=0,column=0,pady=10)
     name_entry = ttk.Entry(lookupframe)
     name_entry.insert(0,"Cristiano Gomes")
     name_entry.bind("<FocusIn>", lambda event :on_focuIn(event,name_entry,"Cristiano Gomes"))
     name_entry.bind("<FocusOut>",lambda event :on_focusOut(event,name_entry,"Cristiano Gomes"))
-    name_entry.grid(row=1,column=0,sticky="ew",padx=20,pady=20)
+    name_entry.grid(row=1,column=0,sticky="ew",padx=20,pady=10)
 
 
 
     phonenumber_label = ttk.Label(lookupframe,text="Numero Telefonico")
-    phonenumber_label.grid(row=2,column=0)
+    phonenumber_label.grid(row=2,column=0,pady=5)
     phonenumber_entry = ttk.Entry(lookupframe)
     phonenumber_entry.insert(0,"+52 33 1234 5678")
     phonenumber_entry.bind("<FocusIn>",lambda event :on_focuIn(event,phonenumber_entry,"+52 33 1234 5678"))
     phonenumber_entry.bind("<FocusOut>",lambda event :on_focusOut(event,phonenumber_entry,"+52 33 1234 5678"))
-    phonenumber_entry.grid(row=3,column=0,padx=20,pady=20,sticky="ew")
+    phonenumber_entry.grid(row=3,column=0,padx=20,sticky="ew",pady=10)
 
 
 
@@ -640,9 +641,31 @@ def VisitMark():
     email_entry.insert(0,"example@dominio.com")
     email_entry.bind("<FocusIn>",lambda event :on_focuIn(event,email_entry,"example@dominio.com"))
     email_entry.bind("<FocusOut>",lambda event :on_focusOut(event,email_entry,"example@dominio.com"))
-    email_entry.grid(row=5,column=0,padx=10,pady=10,sticky="ew")
+    email_entry.grid(row=5,column=0,padx=10,sticky="ew",pady=10)
     
+
+    buttonsFrame = ttk.Frame(topframe)
+    buttonsFrame.grid(row=0,column=1)
     
+
+    def ClientConfirm():
+        name = name_entry.get()
+        phoneNumber = phonenumber_entry.get()
+        email = email_entry.get()
+        if(name != "Cristiano Gomes"):
+            visitRegistration(name,1)
+        elif(phoneNumber != "+52 33 1234 5678"):
+            visitRegistration(phoneNumber,2)
+        else:
+            visitRegistration(email,0)
+
+    
+    visit_register_button = ttk.Button(buttonsFrame,text="Registrar visita",command=ClientConfirm)
+    visit_register_button.grid(row=1, column=1,padx=20,pady=20)
+
+    
+    returnToMenu_button = ttk.Button(buttonsFrame,text="Menu Principal")
+    returnToMenu_button.grid(row=3,column=1,padx=20,pady=20)
     
     top.mainloop()
 

@@ -80,7 +80,7 @@
         "Productos Utilizados": "Aceite para el cabello",
         "Servicios Alternos": "Depilaci\u00f3n de cejas",
         "Observaciones": "Cabello corto",
-        "Visitas": 1,
+        "Visitas": "3",
         "Registro": "2023-06-06"
     },
     {
@@ -150,7 +150,7 @@
         "Productos Utilizados": "Gel para el cabello",
         "Servicios Alternos": "Depilaci\u00f3n de cejas",
         "Observaciones": "Cabello corto",
-        "Visitas": 1,
+        "Visitas": "2",
         "Registro": "2023-06-06"
     },
     {
@@ -164,35 +164,7 @@
         "Productos Utilizados": "Aceite para el cabello",
         "Servicios Alternos": "Afeitado de cabeza",
         "Observaciones": "Barba poblada",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
-    },
-    {
-        "Nombre del Cliente": "B Hb Hbh",
-        "Fecha de Nacimiento": "8/20/23",
-        "Whatsapp": "bh",
-        "Correo Electronico": "h",
-        "Nombre del Barbero": "H",
-        "Estilo de Corte": "H",
-        "Frecuencia de Corte": "B",
-        "Productos Utilizados": "Hbbh",
-        "Servicios Alternos": "b",
-        "Observaciones": "H",
-        "Visitas": 1,
-        "Registro": "2023-06-06"
-    },
-    {
-        "Nombre del Cliente": "J Ubn",
-        "Fecha de Nacimiento": "8/24/23",
-        "Whatsapp": "un",
-        "Correo Electronico": "un",
-        "Nombre del Barbero": "",
-        "Estilo de Corte": "Unu",
-        "Frecuencia de Corte": "N",
-        "Productos Utilizados": "U",
-        "Servicios Alternos": "u",
-        "Observaciones": "Un",
-        "Visitas": 1,
+        "Visitas": "3",
         "Registro": "2023-06-06"
     },
     {
@@ -206,21 +178,7 @@
         "Productos Utilizados": "Mom",
         "Servicios Alternos": "Dise\u00f1o de barba",
         "Observaciones": "UNA VERGA",
-        "Visitas": 1,
+        "Visitas": "2",
         "Registro": "2023-06-06"
-    },
-    {
-        "Nombre del Cliente": "N H",
-        "Fecha de Nacimiento": "8/26/23",
-        "Whatsapp": "nhj",
-        "Correo Electronico": "nh",
-        "Nombre del Barbero": "Hn",
-        "Estilo de Corte": "Nh",
-        "Frecuencia de Corte": "N",
-        "Productos Utilizados": "H",
-        "Servicios Alternos": "h",
-        "Observaciones": "H",
-        "Visitas": 1,
-        "Registro": "2023-08-26"
     }
 ]

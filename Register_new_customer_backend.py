@@ -81,7 +81,6 @@ def addingdatabase(client,barber,style,products,birthday,phoneNumber,observation
 def updateClientInfo(IDNAME,client,barber,style,products,birthday,phoneNumber,observations,email,services,frequency,visitas):
     path, main = loadDatabase()
     clientExist = False;
-    print(IDNAME)
     for entry in main:
         if entry["Nombre del Cliente"] == IDNAME:
             entry["Nombre del Cliente"] = client
@@ -105,15 +104,62 @@ def updateClientInfo(IDNAME,client,barber,style,products,birthday,phoneNumber,ob
             
     
 def DeleteClient(name):
-
     path, main = loadDatabase()
-
     dataUpdate = [entry for entry in main if entry["Nombre del Cliente"] != name]
     with open(path.get("DatabasePath"), "w") as file:
         json.dump(dataUpdate,file,indent=4)  
         
-            
-            
+def visitRegistration(IDNAME,TypeofSearch):
+    path, main = loadDatabase()
+    clientExist = False;
+    if(TypeofSearch == 1 ):#Bsuueda por nombre
+        for entry in main:
+            if(entry["Nombre del Cliente"] == IDNAME):
+                number = int(entry["Visitas"])
+                number += 1;
+                number = str(number)
+                entry["Visitas"] = number;
+                clientExist = True
+                break;
+        if(clientExist):
+            messagebox.showinfo(title="Visita registrada con exito", message=f"La vista de {IDNAME} fue registrada con exito!")
+        else:
+            messagebox.showerror(title="Cliente inexistente",message=f"El cliente {IDNAME} no fue encontrado en la base de datos, intente nuevamente.")
+
+
+    elif(TypeofSearch == 2):# busqueda por telefonoi
+        for entry in main:
+            if(entry["Whatsapp"] == IDNAME):
+                number = int(entry["Visitas"])
+                number += 1;
+                number = str(number)
+                entry["Visitas"] = number;
+                clientExist = True
+                username = entry["Nombre del Cliente"]
+                break;
+        if(clientExist):
+            messagebox.showinfo(title="Visita registrada con exito", message=f"La vista de {username} fue registrada con exito!")
+        else:
+            messagebox.showerror(title="Cliente inexistente",message=f"El cliente {IDNAME} no fue encontrado en la base de datos, intente nuevamente.")
+
+    else:
+        for entry in main:
+            if(entry["Correo Electronico"] == IDNAME):
+                number = int(entry["Visitas"])
+                number += 1;
+                number = str(number)
+                entry["Visitas"] = number;
+                clientExist = True
+                username = entry["Nombre del Cliente"]
+                break;
+        if(clientExist):
+            messagebox.showinfo(title="Visita registrada con exito", message=f"La vista de {username} fue registrada con exito!")
+        else:
+            messagebox.showerror(title="Cliente inexistente",message=f"El cliente {IDNAME} no fue encontrado en la base de datos, intente nuevamente.")
+    if(clientExist == True): 
+        with open(path.get("DatabasePath"), "w") as file:
+            json.dump(main,file,indent=4)
+
             
             
             
