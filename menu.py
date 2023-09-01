@@ -550,12 +550,6 @@ def NewClient():
     menu_button = ttk.Button(wetdgeFrame,text="Menu Principal",command=lambda: returntomenu(newclientWindow))
     menu_button.grid(row=1,column=2,sticky="news",padx=20,pady=20)
 
-    newclientWindow.protocol("WM_DELETE_WINDOW",endcode)
-
-    #exit_button = tkr.Button(wetdgeFrame,text="Salir",command=ebf);
-    #exit_button.grid(row=2,column=2,sticky="news",padx=20,pady=20) 
-
-
 
     newclientWindow.mainloop()
 
@@ -608,7 +602,7 @@ def VisitMark():
     top = tkr.Toplevel()
     topframe = ttk.Frame(top)
     topframe.grid(row=0,column=0)
-
+    top.resizable(False, False)
 
     
     lookupframe = ttk.LabelFrame(topframe,text="Busqueda de Cliente")
@@ -672,6 +666,7 @@ def VisitMark():
 def mainmenu():
     ##### ROOT FRAME ####
     window = tkr.Tk();
+    window.resizable(False, False)
     window.title("Barberia JLU - Menu -")
     # DEFUALT THEME ###
     theme_style = ttk.Style(window)
@@ -727,6 +722,9 @@ def mainmenu():
     database_location = ttk.Button(labelmainframe,text="Path Base de datos",command=pathdatabase)
     database_location.grid(row=2,column=1,sticky="NEWS",padx=10,pady=10)
     
+
+    versionLabel = ttk.Label(frame, text="Version: Alpha 1.V")
+    versionLabel.grid(row=3,column=0)
     window.protocol("WM_DELETE_WINDOW",endcode)
     
 
