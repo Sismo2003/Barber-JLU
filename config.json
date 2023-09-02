@@ -1,3 +1,5 @@
 {
-    "DatabasePath": "database.json"
+    "DatabasePath": "database.json",
+    "ThemePathLigth" : "forest-light.tcl",
+    "ThemePathDark" : "forest-dark.tcl"
 }

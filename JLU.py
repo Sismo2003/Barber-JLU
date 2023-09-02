@@ -1,20 +1,26 @@
 import json
-import tkinter as tkr
+#import tkinter as tkr
 import json
 import datetime
-from tkinter import ttk
+#from tkinter import ttk
 from tkinter import messagebox
-from tkcalendar import DateEntry
+#from tkcalendar import DateEntry
 import time
 from Register_new_customer_backend import *
+import calendar  
+try: 
+    import tkinter as tkr 
+    from tkinter import ttk
+    from tkcalendar import DateEntry
+except ImportError: 
+    import tkinter as tkr 
+    from tkinter import ttk
+import babel.numbers
 
-def endcode():
-    exit()
     
  
 def ebf ():
     messagebox.showwarning("Cierre de programa","Estas apunto de cerrar el programa, estas actualmente ingresando los datos de un cliente.")
-    exit();
     
 def on_focusOut (event,variable ,text1):
     if variable.get() == "":
@@ -658,7 +664,7 @@ def VisitMark():
     visit_register_button.grid(row=1, column=1,padx=20,pady=20)
 
     
-    returnToMenu_button = ttk.Button(buttonsFrame,text="Menu Principal")
+    returnToMenu_button = ttk.Button(buttonsFrame,text="Menu Principal",command= lambda: returntomenu(top))
     returnToMenu_button.grid(row=3,column=1,padx=20,pady=20)
     
     top.mainloop()
@@ -670,8 +676,10 @@ def mainmenu():
     window.title("Barberia JLU - Menu -")
     # DEFUALT THEME ###
     theme_style = ttk.Style(window)
-    window.tk.call("source","forest-dark.tcl")
-    window.tk.call("source","forest-light.tcl")
+    with open("config.json","r") as file:
+        path = json.load(file);
+    window.tk.call("source",f"{path.get('ThemePathLigth')}")
+    window.tk.call("source",f"{path.get('ThemePathDark')}")
     theme_style.theme_use("forest-dark")
     
     frame = ttk.Frame(window)
@@ -713,19 +721,17 @@ def mainmenu():
     lookup_button.grid(row=1,column=0,sticky="NEWS",padx=20,pady=20)
 
 
-    exitbutton = ttk.Button(labelmainframe,text="Salir",command=endcode)
-    exitbutton.grid(row=1,column=1,sticky="NEWS",padx=20,pady=20);
     
     mode_switch = ttk.Checkbutton(labelmainframe,text="Apariencia",style="Switch",command=lambda: theme_mode(mode_switch,theme_style))
     mode_switch.grid(row=2,column=0,padx=20,pady=20,sticky="NEWS")
 
     database_location = ttk.Button(labelmainframe,text="Path Base de datos",command=pathdatabase)
-    database_location.grid(row=2,column=1,sticky="NEWS",padx=10,pady=10)
+    database_location.grid(row=1,column=1,sticky="NEWS",padx=20,pady=20)
     
 
     versionLabel = ttk.Label(frame, text="Version: Alpha 1.V")
     versionLabel.grid(row=3,column=0)
-    window.protocol("WM_DELETE_WINDOW",endcode)
+
     
 
     window.mainloop()
