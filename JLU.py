@@ -116,7 +116,7 @@ def ClientEdit(record):
         lookupclient_button()
     
     top = tkr.Toplevel()
-    
+    top.iconbitmap("images/item.ico")
     top.resizable(False, False)
     top.title("Edicion de datos")
     frame = ttk.Frame(top)
@@ -236,8 +236,7 @@ def ClientEdit(record):
     
     menu_button = ttk.Button(wetdgeFrame,text="Salir",command=returnTopObject)
     menu_button.grid(row=2,column=1,sticky="news",padx=20,pady=20)
-
-    wetdgeFrame.mainloop();
+    top.mainloop();
 
 
 def lookupclient_button():
@@ -399,6 +398,7 @@ def lookupclient_button():
 
     showdatawindow.resizable(False, False)
     #showdatawindow.protocol("WM_DELETE_WINDOW",endcode)
+    showdatawindow.iconbitmap("images/item.ico")
     showdatawindow.mainloop()
 
 
@@ -410,13 +410,6 @@ def theme_mode (interruptor,style):
         style.theme_use("forest-dark")
 
 
-def visit():
-    top = tkr.Toplevel()
-    top.title("Registro de visita de cliente")
-    visitmainframe = tkr.Frame(top)
-    visitmainframe.pack()
-    
-    visitmainframe.mainloop()
 
 
 def NewClient():
@@ -455,6 +448,7 @@ def NewClient():
 
     #Main Window
     newclientWindow = tkr.Toplevel()
+    newclientWindow.iconbitmap("images/item.ico")
     newclientWindow.title("Registrar un Nuevo Cliente ") 
     wetdgeFrame = ttk.Frame(newclientWindow);
     wetdgeFrame.pack()
@@ -598,6 +592,7 @@ def pathdatabase ():
     returntomenubutton = ttk.Button(pathmainframe,text="Menu",command=lambda: returntomenu(pathwindow))
     returntomenubutton.grid(column=1,row=2,padx=10,pady=10);
     pathwindow.resizable(False, False)
+    pathwindow.iconbitmap("images/item.ico")
     pathwindow.mainloop()
 
 
@@ -666,7 +661,7 @@ def VisitMark():
     
     returnToMenu_button = ttk.Button(buttonsFrame,text="Menu Principal",command= lambda: returntomenu(top))
     returnToMenu_button.grid(row=3,column=1,padx=20,pady=20)
-    
+    top.iconbitmap("images/item.ico")
     top.mainloop()
 
 def mainmenu():
@@ -733,7 +728,7 @@ def mainmenu():
     versionLabel.grid(row=3,column=0)
 
     
-
+    window.iconbitmap("images/item.ico")
     window.mainloop()
 
 
